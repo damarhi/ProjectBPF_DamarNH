@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class produkController extends Controller
 {
@@ -11,7 +12,7 @@ class produkController extends Controller
      */
     public function index()
     {
-        $produk= \App\Models\produk::latest()->paginate(10);
+        $produk['produk']= \App\Models\produk::latest()->paginate(10);
         return view('produk.index',$produk);
     }
 
@@ -20,7 +21,7 @@ class produkController extends Controller
      */
     public function create()
     {
-        //
+        return view('produk.create');
     }
 
     /**
@@ -28,8 +29,29 @@ class produkController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $requestData = $request->validate([
+            'harga_asli' => 'required|numeric',
+            'harga_jual' => 'required|numeric',
+            'stok_sekarang' => 'required|numeric',
+            'stok_terjual' => 'nullable|numeric',
+            'jenis' => 'required',
+            'foto' => 'nullable|image', // Pastikan ini memiliki tipe file
+        ]);
+
+        $produk = new \App\Models\produk; // membuat objek kosong di variabel model
+        $produk->fill($requestData); // mengisi var model dengan data yang sudah divalidasi requestData
+
+        // Hanya jika file foto diunggah, simpan path-nya
+        $produk->foto = $request->file('foto')->store('produk','public');
+
+        // Set stok_terjual default ke 0 jika null
+        $produk->stok_terjual = $requestData['stok_terjual'] ?? 0;
+
+        $produk->save();
+
+        return back();
     }
+
 
     /**
      * Display the specified resource.

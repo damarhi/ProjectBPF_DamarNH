@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->integer('harga_asli');
             $table->integer('harga_jual');
-            $table->enum('jenis',['3kg','8kg','12kg']);
+            $table->string('jenis');
             $table->integer('stok_sekarang');
             $table->integer('stok_terjual');
             $table->timestamps();

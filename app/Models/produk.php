@@ -12,6 +12,15 @@ class produk extends Model
     use HasFactory;
     protected $guarded =[];
 
+    protected $fillable =[
+            'harga_asli',
+            'harga_jual',
+            'stok_sekarang',
+            'stok_terjual',
+            'jenis',
+            'foto',
+    ];
+
     public function transaksi() : hasMany {
         return $this ->hasMany(transaksi::class);
     }
