@@ -1,4 +1,9 @@
-@extends('layouts.app_tiny',['title'=> 'Data Pembookingan'])
+@php
+    $layout = (auth()->check() && auth()->user()->role == 'admin') ? 'layouts.app_tiny' : 'layouts.app_home';
+@endphp
+
+@extends($layout)
+
 @section('content')
     <div class="card">
         <div class="card-body">
