@@ -51,7 +51,6 @@
                                 <form action="/booking/{{ $item->id }}" method="POST" enctype="multipart/form-data">
                                     @method('put')
                                     @csrf
-                                    @if (auth()->user() && auth()->user()->role == 'admin')
                                     <div class="form-group mt-1 mb-3">
                                         <label for="status">Status</label>
                                         <select name="status" id="status" class="form-control js-example-basic-single">
@@ -62,6 +61,9 @@
                                                 Disetujui</option>
                                             <option value="Ditolak" {{ $item->status == 'Ditolak' ? 'selected' : '' }}>
                                                 Ditolak
+                                            </option>
+                                            <option value="Selesai" {{ $item->status == 'Selesai' ? 'selected' : '' }}>
+                                                Selesai
                                             </option>
                                             <option value="Tunggu" {{ $item->status == 'Tunggu' ? 'selected' : '' }}>Tunggu
                                             </option>
@@ -79,7 +81,6 @@
                                     </div>
 
                                     <button type="submit" class="btn btn-primary" id="submit">Update</button>
-                                    @endif
                                 </form>
 
 

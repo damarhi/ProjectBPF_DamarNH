@@ -56,7 +56,15 @@
                         </span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="nav-link pl-3" href="logout">LOGOUT</a>
+                        <div class="message-body">
+                            <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
+                                <i class="ti ti-user fs-6"></i>
+                                <p class="mb-0 fs-3">{{ auth()->user()->name }}</p>
+
+                            </a>
+
+                            <a href="logout" class="btn btn-outline-primary mx-3 mt-2 d-block">Logout</a>
+                        </div>
                     </div>
                 </li>
             </ul>
@@ -73,7 +81,17 @@
                         <img src="/light/assets/images/weblogo.png" alt="" class="logo-small">
                     </a>
                 </div>
+
                 <ul class="navbar-nav flex-fill w-100 mb-2">
+                    <li class="nav-item w-100">
+                        <a class="nav-link" href="widgets.html">
+                            <i class="fe fe-home fe-16"></i>
+                            <span class="ml-3 item-text">Dashboard</span>
+                        </a>
+                    </li>
+                    <p class="text-muted nav-heading mt-4 mb-1">
+                        <span>MENU</span>
+                    </p>
                     <li class="nav-item dropdown">
                         <a href="#ui-elements" data-toggle="collapse" aria-expanded="false"
                             class="dropdown-toggle nav-link">
@@ -82,8 +100,7 @@
                         </a>
                         <ul class="collapse list-unstyled pl-4 w-100" id="ui-elements">
                             <li class="nav-item">
-                                <a class="nav-link pl-3" href="/booking"><span
-                                        class="ml-1 item-text">Data</span>
+                                <a class="nav-link pl-3" href="/booking"><span class="ml-1 item-text">Data</span>
                                 </a>
                             </li>
                         </ul>
@@ -92,7 +109,8 @@
                         <a href="#forms" data-toggle="collapse" aria-expanded="false"
                             class="dropdown-toggle nav-link">
                             <i class="fe fe-credit-card fe-16"></i>
-                            <span class="ml-3 item-text sidebar-link {{ request()->is('\pengguna') ? 'active' : '' }}">Pengguna</span>
+                            <span
+                                class="ml-3 item-text sidebar-link {{ request()->is('\pengguna') ? 'active' : '' }}">Pengguna</span>
                         </a>
                         <ul class="collapse list-unstyled pl-4 w-100" id="forms">
                             <li class="nav-item">
@@ -105,7 +123,8 @@
                         <a href="#tables" data-toggle="collapse" aria-expanded="false"
                             class="dropdown-toggle nav-link">
                             <i class="fe fe-grid fe-16"></i>
-                            <span class="ml-3 item-text sidebar-link {{ request()->is('\transaksi') ? 'active' : '' }}" >Transaksi</span>
+                            <span
+                                class="ml-3 item-text sidebar-link {{ request()->is('\transaksi') ? 'active' : '' }}">Transaksi</span>
                         </a>
                         <ul class="collapse list-unstyled pl-4 w-100" id="tables">
                             <li class="nav-item">
@@ -122,21 +141,22 @@
                         </a>
                         <ul class="collapse list-unstyled pl-4 w-100" id="charts">
                             <li class="nav-item">
-                                <a class="nav-link pl-3" href="\produk"><span
-                                        class="ml-1 item-text">Data</span></a>
+                                <a class="nav-link pl-3" href="\produk"><span class="ml-1 item-text">Data</span></a>
                             </li>
                         </ul>
                     </li>
 
                     <li class="nav-item dropdown">
-                        <a href="#contact" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
-                          <i class="fe fe-book fe-16"></i>
-                          <span class="ml-3 item-text">Laporan</span>
+                        <a href="#contact" data-toggle="collapse" aria-expanded="false"
+                            class="dropdown-toggle nav-link">
+                            <i class="fe fe-book fe-16"></i>
+                            <span class="ml-3 item-text">Laporan</span>
                         </a>
                         <ul class="collapse list-unstyled pl-4 w-100" id="contact">
-                          <a class="nav-link pl-3" href="./contacts-list.html"><span class="ml-1">Penjualan</span></a>
+                            <a class="nav-link pl-3" href="/laporan/create"><span
+                                    class="ml-1">Penjualan</span></a>
                         </ul>
-                      </li>
+                    </li>
 
                 </ul>
 
@@ -170,29 +190,40 @@
         gtag('js', new Date());
         gtag('config', 'UA-56159088-1');
     </script>
+    <script>
+        $(document).ready(function() {
+            $('.select2').select2({
+                placeholder: function() {
+                    $(this).data('placeholder');
+                },
+                allowClear: true,
+                width: 'resolve'
+            });
+        });
+    </script>
 
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    @if(session('success'))
-    <script>
-                Swal.fire({
-                    icon: "success",
-                    title: "Your work has been saved",
-                    showConfirmButton: true,
-                    timer: 5000
-                });
-    </script>
+    @if (session('success'))
+        <script>
+            Swal.fire({
+                icon: "success",
+                title: "Your work has been saved",
+                showConfirmButton: true,
+                timer: 5000
+            });
+        </script>
     @endif
 
-    @if(session('error'))
-    <script>
-                Swal.fire({
-                    icon: "error",
-                    title: "Your work has not been saved",
-                    showConfirmButton: true,
-                    timer: 5000
-                });
-    </script>
+    @if (session('error'))
+        <script>
+            Swal.fire({
+                icon: "error",
+                title: "Your work has not been saved",
+                showConfirmButton: true,
+                timer: 5000
+            });
+        </script>
     @endif
 
 

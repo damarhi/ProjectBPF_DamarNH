@@ -1,4 +1,4 @@
-@extends('layouts.app_tiny',['title'=> 'Data Pasien'])
+@extends('layouts.app_tiny',['title'=> 'Data Pengguna'])
 @section('content')
     <div class="card">
         <div class="card-body">

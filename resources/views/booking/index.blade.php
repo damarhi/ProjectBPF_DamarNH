@@ -1,8 +1,4 @@
-@php
-    $layout = (auth()->check() && auth()->user()->role == 'admin') ? 'layouts.app_tiny' : 'layouts.app_home';
-@endphp
-
-@extends($layout)
+@extends('layouts.app_tiny',['title'=> 'Data Booking'])
 
 @section('content')
     <div class="card">
@@ -22,6 +18,8 @@
                     style="margin-right: 12px">Disetujui</a>
                 <a href="/booking?status=Ditolak" class="btn btn-primary{{ request('status') == 'Ditolak' ? 'active' : '' }}"
                     style="margin-right: 12px">Ditolak</a>
+                <a href="/booking?status=Selesai" class="btn btn-primary{{ request('status') == 'Selesai' ? 'active' : '' }}"
+                    style="margin-right: 12px">Selesai</a>
                 <br>
 
 

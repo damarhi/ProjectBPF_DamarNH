@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('produk_id');
             $table->foreignId('pengguna_id');
             $table->date('tanggal_booking');
-            $table->enum('status',['Tunggu','Disetujui','Ditolak']);
+            $table->enum('status',['Tunggu','Disetujui','Ditolak','Selesai']);
             $table->text('deskripsi')->nullable();
             $table->integer('jumlah_produk');
             $table->integer('total_harga');

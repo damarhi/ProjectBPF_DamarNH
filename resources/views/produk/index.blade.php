@@ -1,8 +1,4 @@
-@php
-    $layout = (auth()->check() && auth()->user()->role == 'admin') ? 'layouts.app_tiny' : 'layouts.app_home';
-@endphp
-
-@extends($layout)
+@extends('layouts.app_tiny',['title'=> 'Data Produk'])
 
 @section('content')
 <div class="row">

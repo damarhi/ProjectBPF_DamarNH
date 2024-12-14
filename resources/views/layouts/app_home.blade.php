@@ -107,13 +107,23 @@
                         <a class="nav-link dropdown-toggle text-muted" href="#" id="navbarDropdownMenuLink"
                             role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <span class="avatar avatar-sm mt-2">
-                                <img src="./assets/avatars/face-1.jpg" alt="..."
+                                <img src="/light/assets/avatars/face-1.jpg" alt="..."
                                     class="avatar-img rounded-circle">
                             </span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                             <li class="nav-item">
-                                <a class="nav-link pl-3" href="logout">LOGOUT</a>
+                                <div class="message-body">
+                                    <a href="javascript:void(0)"
+                                        class="d-flex align-items-center gap-2 dropdown-item">
+                                        <i class="ti ti-user fs-6"></i>
+                                        <p class="mb-0 fs-3">{{ auth()->user()->name }}</p>
+
+                                    </a>
+
+                                    <a href="logout" class="btn btn-outline-primary mx-3 mt-2 d-block">
+                                        Logout</a>
+                                </div>
                             </li>
                         </ul>
                     </li>
@@ -159,6 +169,17 @@
     <script src='/light/js/dropzone.min.js'></script>
     <script src='/light/js/uppy.min.js'></script>
     <script src='/light/js/quill.min.js'></script>
+    <script>
+        $(document).ready(function() {
+            $('.select2').select2({
+                placeholder: function() {
+                    $(this).data('placeholder');
+                },
+                allowClear: true,
+                width: 'resolve'
+            });
+        });
+    </script>
     <script>
         $('.select2').select2({
             theme: 'bootstrap4',

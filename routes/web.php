@@ -5,6 +5,7 @@ use App\Http\Controllers\penggunaController;
 use App\Http\Controllers\transaksiController;
 use App\Http\Controllers\bookingController;
 use App\Http\Controllers\produkController;
+use App\Http\Controllers\laporanController;
 use App\Models\booking;
 use App\Models\produk;
 use App\Models\transaksi;
@@ -16,6 +17,7 @@ Route::resource('pengguna', penggunaController::class);
 Route::resource('transaksi', transaksiController::class);
 Route::resource('booking', bookingController::class);
 Route::resource('produk', produkController::class);
+Route::resource('laporan', laporanController::class);
 // Route::middleware([Authenticate::class])->group(function(){
 //    Route::resource('transaksi',transaksiController::class);
 //     Route::resource('pengguna', penggunaController::class);
@@ -29,6 +31,8 @@ Route::resource('produk', produkController::class);
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/dashboard', [App\Http\Controllers\dashboardController::class, 'index'])->name('dashboard');
+
 Route::get('logout',function(){
     auth::logout();
     return redirect('login');
