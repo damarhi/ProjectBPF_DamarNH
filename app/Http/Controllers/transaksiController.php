@@ -55,6 +55,7 @@ class transaksiController extends Controller
 
         $stok_sekarang = $produk->stok_sekarang - $requestData['jumlah_produk'] ;
         $stok_terjual = $produk->stok_terjual + $requestData['jumlah_produk'];
+        
         $produk->stok_sekarang = $stok_sekarang;
         $produk->stok_terjual = $stok_terjual;
         $produk->save();

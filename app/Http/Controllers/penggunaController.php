@@ -29,13 +29,19 @@ class penggunaController extends Controller
     public function store(Request $request)
     {
         $requestData = $request-> validate([
-            'nama' => 'required|date',
+            'nama' => 'required',
             'nik' => 'required|numeric',
         ]);
-        $daftar = new \App\Models\pengguna();
-        $daftar->fill($requestData);
-        $daftar->save();
-        return redirect()->route('pengguna.index');
+        $pengguna = new \App\Models\pengguna();
+        $pengguna->fill($requestData);
+        $pengguna->save();
+        if($pengguna){
+            session()->flash('success');
+        }
+        else{
+            session()->flash('error');
+        }
+        return back();
     }
 
 

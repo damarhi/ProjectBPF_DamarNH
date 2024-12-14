@@ -12,8 +12,8 @@ use Illuminate\Auth\Middleware\Authenticate;
 use Illuminate\Support\Facades\auth;
 
 
-Route::resource('transaksi', transaksiController::class);
 Route::resource('pengguna', penggunaController::class);
+Route::resource('transaksi', transaksiController::class);
 Route::resource('booking', bookingController::class);
 Route::resource('produk', produkController::class);
 // Route::middleware([Authenticate::class])->group(function(){
@@ -33,3 +33,4 @@ Route::get('logout',function(){
     auth::logout();
     return redirect('login');
 });
+

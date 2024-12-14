@@ -13,8 +13,8 @@
                 <tr>
                     <th>NO</th>
                     <th>Nama</th>
-                    <th>nik</th>
-                    <th>email</th>
+                    <th>NIK</th>
+                    <th>Tanggal Buat</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -24,7 +24,7 @@
                      <td> {{ $loop->iteration}}</td>
                      <td> {{ $item->nama}}</td>
                      <td> {{ $item->nik}}</td>
-                     <td> {{ $item->email }}</td>
+                     <td> {{ $item->created_at }}</td>
                      <td class="text-left">
                         <a href="/pasien/{{ $item->id }}/edit" class="btn btn-warning btn-sm ml-2">Edit</a>
                         <form action="/pasien/{{ $item->id }}" method="POST" class="d-inline">

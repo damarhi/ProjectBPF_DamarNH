@@ -50,4 +50,5 @@
         </div>
     </div>
     @include('transaksi.modal_create')
+    
 @endsection

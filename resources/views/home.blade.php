@@ -1,4 +1,9 @@
-@extends('layouts.app')
+@php
+    $layout = (auth()->check() && auth()->user()->role == 'admin') ? 'layouts.app_tiny' : 'layouts.app_home';
+@endphp
+
+@extends($layout)
+
 
 @section('content')
 <div class="container">

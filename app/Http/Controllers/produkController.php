@@ -66,7 +66,8 @@ class produkController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $data['produk']= \App\Models\produk::findOrFail($id);
+        return view('produk.modal_edit',$data);
     }
 
     /**
@@ -74,7 +75,22 @@ class produkController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $requestData = $request->validate([
+            'stok_sekarang' => 'required|numeric',
+            'stok_terjual' => 'required|numeric',
+        ]);
+        $produk = \App\Models\produk::findOrFail($id);
+        $produk->fill($requestData);
+        $produk->save();
+        if($produk){
+            session()->flash('success');
+        }
+        else{
+            session()->flash('error');
+        }
+
+        // flash('Data berhasil di simpan')->success();
+        return redirect('/produk');
     }
 
     /**
