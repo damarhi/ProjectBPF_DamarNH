@@ -1,229 +1,235 @@
 @extends('layouts.app_home')
 @section('content')
+<main class="main">
 
-    <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+    <!-- Hero Section -->
+    <section id="hero" class="hero section light-background">
 
-        <!-- Header -->
-        <header id="header">
-            <div class="intro">
-                <div class="container">
-                    <div class="row">
-                        <div class="intro-text">
-                            <h1>SELAMAT DATANG DI</h1>
-                            <hr>
-                            <p>Pangkalan Gas Al - Fatah</p>
-                            <a href="#portfolio" class="btn btn-default btn-lg page-scroll">Ayoo Booking...</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </header>
-        <!-- Navigation -->
-        <div id="nav">
-            <nav class="navbar navbar-custom">
-                <div class="container">
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle" data-toggle="collapse"
-                            data-target=".navbar-main-collapse"> <i class="fa fa-bars"></i> </button>
-                    </div>
+        <div class="container">
+            <div class="row gy-4">
+                <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center" data-aos="zoom-out">
+                    <h1>Welcome to <span>BizLand</span></h1>
+                    <p>We are team of talented designers making websites with Bootstrap</p>
+                    <div class="d-flex">
+                        <a href="#about" class="btn-get-started">Get Started</a>
 
-                    <!-- Collect the nav links, forms, and other content for toggling -->
-                    <!-- Navbar Header untuk Logo -->
-
-                    <!-- Navbar Navigasi -->
-                    <div class="collapse navbar-collapse navbar-main-collapse">
-                        <ul class="nav navbar-nav">
-                            <!-- Navigasi Utama -->
-                            <li style="margin-right: 150px">
-                                <img src="/light/assets/images/weblogo.png" alt="Logo"
-                                    style="max-width: 100%;max-height: 65px; object-fit: contain;"> <!-- Logo Website -->
-                            </li>
-                            <li class="hidden"><a href="#page-top"></a></li>
-                            <li><a class="page-scroll" href="#about">List Booking</a></li>
-                            <li><a class="page-scroll" href="#portfolio">Produk</a></li>
-                            <li><a class="page-scroll" href="#contact">Kontak</a></li>
-                            @if (Auth::check())
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                                        aria-expanded="false">
-                                        <i class="fa fa-user-circle fa-lg"></i> <!-- Icon User -->
-                                        <span class="caret"></span>
-                                    </a>
-                                    <ul class="dropdown-menu" role="menu">
-                                        <li class="dropdown-header">
-                                            {{ Auth::user()->name }} <!-- Nama User -->
-                                        </li>
-                                        <li class="divider"></li>
-                                        <li>
-                                            <a href="logout">
-                                                <i class="fa fa-sign-out"></i> Logout <!-- Icon Logout -->
-                                            </a>
-                                        </li>
-                                    </ul>
-                            @endif
-                        </ul>
-                    </div>
-
-                </div>
-            </nav>
-        </div>
-
-        <!-- About Section -->
-        <div id="about">
-            <div class="container">
-                <div class="section-title text-center center">
-                    <h2>List Bookingan Anda</h2>
-                    <hr>
-                </div>
-                <div class="row">
-                    <div class="table-responsive">
-                        <table class="table table-hover table-bordered table-striped">
-                            <div class="row mb-3 mt-3">
-                                <div class="col-md-6">
-                                    <a href="#" class="btn btn-primary btn-sm" data-toggle="modal"
-                                        data-target="#bookingcreate">Tambah Pembookingan</a>
-                                </div>
-                                <div class="col-md-12 mt-2">
-                                    <a href="/booking"
-                                        class="btn btn-outline-primary btn-sm {{ !request()->has('status') ? 'active' : '' }} mx-1">Semua</a>
-                                    <a href="/booking?status=Tunggu"
-                                        class="btn btn-outline-primary btn-sm {{ request('status') == 'Tunggu' ? 'active' : '' }} mx-1">Tunggu</a>
-                                    <a href="/booking?status=Disetujui"
-                                        class="btn btn-outline-primary btn-sm {{ request('status') == 'Disetujui' ? 'active' : '' }} mx-1">Disetujui</a>
-                                    <a href="/booking?status=Ditolak"
-                                        class="btn btn-outline-primary btn-sm {{ request('status') == 'Ditolak' ? 'active' : '' }} mx-1">Ditolak</a>
-                                    <a href="/booking?status=Selesai"
-                                        class="btn btn-outline-primary btn-sm {{ request('status') == 'Selesai' ? 'active' : '' }} mx-1">Selesai</a>
-                                </div>
-                            </div>
-
-                            <thead class="text-center">
-                                <tr>
-                                    <th style="width: 5%;">NO</th>
-                                    <th style="width: 15%;">Pelanggan</th>
-                                    <th style="width: 15%;">Jenis Produk</th>
-                                    <th style="width: 10%;">Jumlah Produk</th>
-                                    <th style="width: 15%;">Total Harga</th>
-                                    <th style="width: 15%;">Tanggal Booking</th>
-                                    <th style="width: 10%;">Status</th>
-                                    <th style="width: 15%;">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($booking as $item)
-                                    <tr>
-                                        <td class="text-center">{{ $loop->iteration }}</td>
-                                        <td>{{ $item->pengguna->nama }}</td>
-                                        <td>{{ $item->produk->jenis }}</td>
-                                        <td class="text-center">{{ $item->jumlah_produk }}</td>
-                                        <td>RP. {{ number_format($item->total_harga) }}-</td>
-                                        <td>{{ $item->tanggal_booking }}</td>
-                                        <td class="text-center">{{ $item->status }}</td>
-                                        <td class="text-center">
-                                            <a href="#bookingshow{{ $item->id }}" class="btn btn-info btn-sm mx-1">
-                                                <i class="fa fa-eye"></i>
-                                            </a>
-                                            <form action="/booking/{{ $item->id }}" method="POST" class="d-inline">
-                                                @csrf
-                                                @method('delete')
-                                                <button class="btn btn-danger btn-sm mx-1">
-                                                    <i class="fa fa-trash"></i>
-                                                </button>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-        <!-- portofolio Section -->
-        <div id="portfolio">
-            <div class="container">
-                <div class="section-title text-center center">
-                    <h2>Produk</h2>
-                    <hr>
-                </div>
-                <div class="row">
-                    <div class="portfolio-items">
-                        @foreach ($listProduk as $item)
-                            <div class="col-sm-6 col-md-0 col-lg-4 graphic">
-                                <div class="portfolio-item">
-                                    <div class="hover-bg" style="height:300px"> <a href="#bookingCreate" title="Project Title"
-                                            data-toggle="modal" data-bs-toggle="modal">
-                                            <div class="hover-text">
-                                                <h4>{{ $item->jenis }}</h4>
-                                                <p class="small">Harga Jual: {{ $item->harga_jual }}</p>
-                                                <p class="small text-muted mb-0">Stok : {{ $item->stok_sekarang }}</p>
-                                            </div>
-                                            @if ($item->foto)
-                                                <a href="{{ Storage::url($item->foto) }}" target="blank">
-                                                    <img src="{{ Storage::url($item->foto) }}" class="img-responsive"
-                                                        style="width: 350px; height: 350px; object-fit: cover;" alt="">
-                                                </a>
-                                            @endif
-
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        @endforeach
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Contact Section -->
-        <div id="contact" class="text-center">
-            <div class="container">
-                <div class="section-title center">
-                    <h2>Get In Touch</h2>
-                    <hr>
+
+    </section><!-- /Hero Section -->
+
+    <!-- Featured Services Section -->
+    <!-- About Section -->
+    <section id="about" class="about section light-background">
+
+        <!-- Section Title -->
+        <div class="container section-title" data-aos="fade-up">
+            <h2>About</h2>
+            <p><span>Find Out More</span> <span class="description-title">About Us</span></p>
+        </div><!-- End Section Title -->
+
+        <div class="container">
+
+            <div class="row gy-3">
+
+                <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+                    <img src="/BizLand/assets/img/about.jpg" alt="" class="img-fluid">
                 </div>
-                <div class="col-md-8 col-md-offset-2">
-                    <form name="sentMessage" id="contactForm" novalidate>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <input type="text" id="name" class="form-control" placeholder="Name"
-                                        required="required">
-                                    <p class="help-block text-danger"></p>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <input type="email" id="email" class="form-control" placeholder="Email"
-                                        required="required">
-                                    <p class="help-block text-danger"></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <textarea name="message" id="message" class="form-control" rows="4" placeholder="Message" required></textarea>
-                            <p class="help-block text-danger"></p>
-                        </div>
-                        <div id="success"></div>
-                        <button type="submit" class="btn btn-default btn-lg">Send Message</button>
-                    </form>
-                    <div class="social">
+
+                <div class="col-lg-6 d-flex flex-column justify-content-center" data-aos="fade-up" data-aos-delay="200">
+                    <div class="about-content ps-0 ps-lg-3">
+                        <h3>Voluptatem dignissimos provident quasi corporis voluptates sit assumenda.</h3>
+                        <p class="fst-italic">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                            labore et dolore
+                            magna aliqua.
+                        </p>
                         <ul>
-                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                            <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-                            <li><a href="#"><i class="fa fa-behance"></i></a></li>
+                            <li>
+                                <i class="bi bi-diagram-3"></i>
+                                <div>
+                                    <h4>Ullamco laboris nisi ut aliquip consequat</h4>
+                                    <p>Magni facilis facilis repellendus cum excepturi quaerat praesentium libre trade
+                                    </p>
+                                </div>
+                            </li>
+                            <li>
+                                <i class="bi bi-fullscreen-exit"></i>
+                                <div>
+                                    <h4>Magnam soluta odio exercitationem reprehenderi</h4>
+                                    <p>Quo totam dolorum at pariatur aut distinctio dolorum laudantium illo direna
+                                        pasata redi</p>
+                                </div>
+                            </li>
                         </ul>
+                        <p>
+                            Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+                            reprehenderit in voluptate
+                            velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                            proident, sunt in
+                            culpa qui officia deserunt mollit anim id est laborum
+                        </p>
                     </div>
+
                 </div>
             </div>
+
         </div>
-        <div id="footer">
-            <div class="container text-center">
-                <div class="fnav">
-                    <p>Copyright &copy; Magnum. Designed by <a href="http://www.templatewire.com"
-                            rel="nofollow">TemplateWire</a></p>
-                </div>
+
+    </section><!-- /About Section -->
+    <!-- Services Section -->
+    <section id="services" class="services section">
+
+        <!-- Section Title -->
+        <div class="container section-title" data-aos="fade-up">
+            <h2>Services</h2>
+            <p><span>Check Our</span> <span class="description-title">Services</span></p>
+        </div><!-- End Section Title -->
+
+        <div class="container">
+
+            <div class="row gy-4">
+
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="service-item position-relative">
+                        <span class="advanced">Advanced</span>
+                        <h3>Ultimate</h3>
+                        <h4><sup>$</sup>49<span> / month</span></h4>
+                        <ul>
+                            <li>Aida dere</li>
+                            <li>Nec feugiat nisl</li>
+                            <li>Nulla at volutpat dola</li>
+                            <li>Pharetra massa</li>
+                            <li>Massa ultricies mi</li>
+                        </ul>
+                        <div class="btn-wrap">
+                            <a href="#" class="btn btn-info btn-sm">Buy Now</a>
+                        </div>
+                    </div>
+                </div><!-- End Service Item -->
+
+
             </div>
+
         </div>
-    @endsection
+
+    </section><!-- /Services Section -->
+    <!-- Contact Section -->
+    <section id="contact" class="contact section">
+
+        <!-- Section Title -->
+
+    </section><!-- /Contact Section -->
+
+</main>
+
+<footer id="footer" class="footer">
+
+    <div class="footer-newsletter">
+        <div class="container">
+            <div class="container section-title" data-aos="fade-up">
+                <h2>Contact</h2>
+                <p><span>Need Help?</span> <span class="description-title">Contact Us</span></p>
+            </div><!-- End Section Title -->
+
+            <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+                <div class="row gy-4">
+
+                    <div class="col-lg-5">
+
+                        <div class="info-wrap">
+                            <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="200">
+                                <i class="bi bi-geo-alt flex-shrink-0"></i>
+                                <div>
+                                    <h3>Address</h3>
+                                    <p>A108 Adam Street, New York, NY 535022</p>
+                                </div>
+                            </div><!-- End Info Item -->
+
+                            <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="300">
+                                <i class="bi bi-telephone flex-shrink-0"></i>
+                                <div>
+                                    <h3>Call Us</h3>
+                                    <p>+1 5589 55488 55</p>
+                                </div>
+                            </div><!-- End Info Item -->
+
+                            <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="400">
+                                <i class="bi bi-envelope flex-shrink-0"></i>
+                                <div>
+                                    <h3>Email Us</h3>
+                                    <p>info@example.com</p>
+                                </div>
+                            </div><!-- End Info Item -->
+
+                            <iframe
+                                src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d48389.78314118045!2d-74.006138!3d40.710059!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25a22a3bda30d%3A0xb89d1fe6bc499443!2sDowntown%20Conference%20Center!5e0!3m2!1sen!2sus!4v1676961268712!5m2!1sen!2sus"
+                                frameborder="0" style="border:0; width: 100%; height: 270px;" allowfullscreen=""
+                                loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-7">
+                        <form action="forms/contact.php" method="post" class="php-email-form" data-aos="fade-up"
+                            data-aos-delay="200">
+                            <div class="row gy-4">
+
+                                <div class="col-md-6">
+                                    <label for="name-field" class="pb-2">Your Name</label>
+                                    <input type="text" name="name" id="name-field" class="form-control"
+                                        required="">
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="email-field" class="pb-2">Your Email</label>
+                                    <input type="email" class="form-control" name="email" id="email-field"
+                                        required="">
+                                </div>
+
+                                <div class="col-md-12">
+                                    <label for="subject-field" class="pb-2">Subject</label>
+                                    <input type="text" class="form-control" name="subject" id="subject-field"
+                                        required="">
+                                </div>
+
+                                <div class="col-md-12">
+                                    <label for="message-field" class="pb-2">Message</label>
+                                    <textarea class="form-control" name="message" rows="10" id="message-field" required=""></textarea>
+                                </div>
+
+                                <div class="col-md-12 text-center">
+                                    <div class="loading">Loading</div>
+                                    <div class="error-message"></div>
+                                    <div class="sent-message">Your message has been sent. Thank you!</div>
+
+                                    <button type="submit">Send Message</button>
+                                </div>
+
+                            </div>
+                        </form>
+                    </div><!-- End Contact Form -->
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</footer>
+
+<!-- Scroll Top -->
+<a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i
+        class="bi bi-arrow-up-short"></i></a>
+
+<!-- Preloader -->
+<div id="preloader">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+</div>
+@endsection

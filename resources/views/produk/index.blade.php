@@ -31,9 +31,6 @@
                     <div class="card-footer">
                         <div class="row align-items-center justify-content-between">
                             <div class="col-auto">
-                                <a href="#produkshow{{$item->id}}" class="btn btn-info btn-sm" data-toggle="modal" data-bs-toggle="modal">Detail</a>
-                            </div>
-                            <div class="col-auto">
                                 <div class="file-action">
                                     <a href="#produkedit{{ $item->id }}" class="btn btn-info btn-sm" data-toggle="modal" data-bs-toggle="modal">Atur Stok</a>
                                 </div>
