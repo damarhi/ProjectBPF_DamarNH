@@ -24,4 +24,7 @@ class produk extends Model
     public function transaksi() : hasMany {
         return $this ->hasMany(transaksi::class);
     }
+    public function booking() : hasMany {
+        return $this ->hasMany(booking::class);
+    }
 }

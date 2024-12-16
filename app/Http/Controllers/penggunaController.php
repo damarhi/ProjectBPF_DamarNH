@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class penggunaController extends Controller
 {
@@ -11,7 +13,7 @@ class penggunaController extends Controller
      */
     public function index()
     {
-        $data['pengguna']=\App\Models\pengguna::latest()->paginate(10);
+        $data['listPengguna']= User::latest()->paginate(10);
         return view('pengguna.index',$data);
     }
 
@@ -29,10 +31,15 @@ class penggunaController extends Controller
     public function store(Request $request)
     {
         $requestData = $request-> validate([
-            'nama' => 'required',
+            'name' => 'required',
             'nik' => 'required|numeric',
+            'email' => 'nullable',
+            'password' => 'nullable',
+
         ]);
-        $pengguna = new \App\Models\pengguna();
+
+        $pengguna = new User();
+        $pengguna->role = 'user';
         $pengguna->fill($requestData);
         $pengguna->save();
         if($pengguna){
@@ -58,7 +65,8 @@ class penggunaController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $data['listPengguna']= \App\Models\User::findOrFail($id);
+        return view('pengguna.modal_create',$data);
     }
 
     /**
@@ -66,7 +74,26 @@ class penggunaController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $requestData = $request-> validate([
+            'name' => 'required',
+            'nik' => 'required|numeric',
+            'email' => 'required|email',
+            'password' => 'required',
+
+        ]);
+
+        $pengguna = User::findOrFail($id);
+        $pengguna->role = 'user';
+        $pengguna->password = Hash::make($request['password']);
+        $pengguna->fill($requestData);
+        $pengguna->update();
+        if($pengguna){
+            session()->flash('success');
+        }
+        else{
+            session()->flash('error');
+        }
+        return back();
     }
 
     /**

@@ -2,11 +2,11 @@
 @section('content')
     <div class="card">
         <div class="card-body">
-           <h3>Data Pasien</h3>
+           <h3>Data Pengguna</h3>
            <table class="table table-striped">
             <div class="row mb-4 mt-4">
                 <div class="col-md-6">
-                    <a href="/pasien/create" class="btn btn-primary btn-sm">Tambah Pasien</a>
+                    <a href="" class="btn btn-primary btn-sm" data-toggle="modal" data-target=".modal-right">Pelanggan Baru</a>
                 </div>
             </div>
             <thead>
@@ -19,15 +19,16 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($pengguna as $item)
+                @foreach ($listPengguna as $item)
+                @if ($item->role == 'user')
                  <tr>
                      <td> {{ $loop->iteration}}</td>
-                     <td> {{ $item->nama}}</td>
+                     <td> {{ $item->name}}</td>
                      <td> {{ $item->nik}}</td>
                      <td> {{ $item->created_at }}</td>
                      <td class="text-left">
-                        <a href="/pasien/{{ $item->id }}/edit" class="btn btn-warning btn-sm ml-2">Edit</a>
-                        <form action="/pasien/{{ $item->id }}" method="POST" class="d-inline">
+                        <a href="#penggunaedit{{ $item->id }}" class="btn btn-warning btn-sm ml-2" data-toggle="modal" data-bs-toggle="modal">Edit</a>
+                        <form action="/pengguna/{{ $item->id }}" method="POST" class="d-inline">
                             @csrf
                             @method('delete')
                             <button class="btn btn-danger btn-sm ml-2"
@@ -37,11 +38,14 @@
                     </td>
 
                 </tr>
+                @endif
                 @endforeach
             </tbody>
            </table>
 
-           {!! $pengguna->links() !!}
+           {!! $listPengguna->links() !!}
         </div>
     </div>
+    @include('pengguna.modal_create')
+    @include('pengguna.modal_edit')
 @endsection

@@ -26,8 +26,8 @@
                 @foreach ($transaksi as $item)
                  <tr>
                      <td> {{ $loop->iteration}}</td>
-                     <td> {{ $item->pengguna->nama}}</td>
-                     <td> {{ $item->pengguna->nik}}</td>
+                     <td> {{ $item->User->name}}</td>
+                     <td> {{ $item->User->nik}}</td>
                      <td> {{ $item->produk->jenis}}</td>
                      <td> {{ $item->jumlah_produk}}</td>
                      <td> RP. {{ number_format($item->total_harga)}}- </td>
@@ -50,5 +50,5 @@
         </div>
     </div>
     @include('transaksi.modal_create')
-    
+
 @endsection

@@ -28,9 +28,9 @@
                     <button type="submit" class="btn mb-2 btn-primary" style="float: right;">Tambah</button>
                 </form>
             </div>
-    <div class="modal-footer">
+            <div class="modal-footer">
 
+            </div>
+        </div>
     </div>
-</div>
-</div>
 </div>

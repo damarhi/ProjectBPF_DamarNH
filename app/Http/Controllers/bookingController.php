@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\booking;
 use Illuminate\Http\Request;
-use App\Models\pengguna;
+use App\Models\User;
 use App\Models\produk;
 
 class bookingController extends Controller
@@ -23,7 +23,7 @@ class bookingController extends Controller
         $data = [
             'booking' => $query->paginate(10),
             'listProduk' => \App\Models\produk::all(),
-            'listPengguna' => \App\Models\pengguna::all(),
+            'listPengguna' => \App\Models\User::all(),
         ];
         return view('booking.index', $data);
     }
@@ -34,7 +34,7 @@ class bookingController extends Controller
     public function create()
     {
         $listProduk['listProduk'] = produk::all();
-        $listPengguna ['listPengguna'] = pengguna::all();
+        $listPengguna ['listPengguna'] = User::all();
         return view('booking.create', $listProduk, $listPengguna);
     }
 
@@ -46,7 +46,7 @@ class bookingController extends Controller
         $requestData = $request-> validate([
             'tanggal_booking' => 'required|date',
             'produk_id' => 'required|numeric',
-            'pengguna_id'=>'required|numeric',
+            'user_id'=>'required|numeric',
             'total_harga'=> 'required|numeric|',
             'jumlah_produk'=> 'required|numeric|',
         ]);
@@ -95,59 +95,59 @@ class bookingController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
-{
-    $requestData = $request->validate([
-        'status' => 'required|in:Disetujui,Ditolak,Tunggu,Selesai',
-        'deskripsi' => 'required',
-    ]);
-
-    $booking = \App\Models\Booking::findOrFail($id);
-    $booking->fill($requestData);
-
-    // Jika status adalah Disetujui, update stok
-    if ($requestData['status'] === 'Disetujui') {
-        $produk = $booking->produk; // Menggunakan relasi produk dari booking
-
-        if (!$produk) {
-            return redirect()->back()->withErrors(['produk_id' => 'Produk tidak ditemukan.'])->withInput();
-        }
-
-        // Validasi stok cukup
-        if ($produk->stok_sekarang < $booking->jumlah_produk) {
-            return redirect()->back()->withErrors(['stok' => 'Stok tidak mencukupi untuk proses ini.'])->withInput();
-        }
-
-        // Update stok produk
-        $produk->stok_sekarang -= $booking->jumlah_produk;
-        $produk->stok_terjual += $booking->jumlah_produk;
-        $produk->save();
-    }
-    // Jika status adalah Selesai, pindahkan data ke tabel transaksi
-    elseif ($requestData['status'] === 'Selesai') {
-        // Buat entri baru di tabel transaksi
-        $transaksi = new \App\Models\Transaksi();
-        $transaksi->fill([
-            'produk_id' => $booking->produk_id,
-            'pengguna_id' => $booking->pengguna_id,
-            'jumlah_produk' => $booking->jumlah_produk,
-            'total_harga' => $booking->total_harga,
-            'tanggal_transaksi' => now(), // Atur waktu transaksi
+    {
+        $requestData = $request->validate([
+            'status' => 'required|in:Disetujui,Ditolak,Tunggu,Selesai',
+            'deskripsi' => 'required',
         ]);
 
-        $transaksi->save();
-    }
+        $booking = \App\Models\booking::findOrFail($id);
+        $booking->fill($requestData);
 
-    $booking->save();
+        // Jika status adalah Disetujui, update stok
+        if ($requestData['status'] === 'Disetujui') {
+            $produk = $booking->produk; // Menggunakan relasi produk dari booking
 
-    if($booking){
-        session()->flash('success');
-    }
-    else{
-        session()->flash('error');
-    }
+            if (!$produk) {
+                return redirect()->back()->withErrors(['produk_id' => 'Produk tidak ditemukan.'])->withInput();
+            }
 
-    return redirect('/booking');
-}
+            // Validasi stok cukup
+            if ($produk->stok_sekarang < $booking->jumlah_produk) {
+                return redirect()->back()->withErrors(['stok' => 'Stok tidak mencukupi untuk proses ini.'])->withInput();
+            }
+
+            // Update stok produk
+            $produk->stok_sekarang -= $booking->jumlah_produk;
+            $produk->stok_terjual += $booking->jumlah_produk;
+            $produk->save();
+        }
+        // Jika status adalah Selesai, pindahkan data ke tabel transaksi
+        elseif ($requestData['status'] === 'Selesai') {
+            // Buat entri baru di tabel transaksi
+            $transaksi = new \App\Models\transaksi();
+            $transaksi->fill([
+                'produk_id' => $booking->produk_id,
+                'user_id' => $booking->user_id,
+                'jumlah_produk' => $booking->jumlah_produk,
+                'total_harga' => $booking->total_harga,
+                'tanggal_transaksi' => now(), // Atur waktu transaksi
+            ]);
+
+            $transaksi->save();
+        }
+
+        $booking->save();
+
+        if($booking){
+            session()->flash('success');
+        }
+        else{
+            session()->flash('error');
+        }
+
+        return redirect('/booking');
+    }
 
     /**
      * Remove the specified resource from storage.

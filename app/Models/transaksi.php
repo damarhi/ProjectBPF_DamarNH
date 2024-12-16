@@ -13,8 +13,8 @@ class transaksi extends Model
     use HasFactory;
     protected $guarded =[];
 
-    public function pengguna():BelongsTo{
-        return $this->belongsTo(pengguna::class)->withDefault();
+    public function user():BelongsTo{
+        return $this->belongsTo(user::class)->withDefault();
     }
 
     public function produk():BelongsTo{

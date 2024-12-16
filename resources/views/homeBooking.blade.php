@@ -1,17 +1,17 @@
 <!-- Modal -->
-<form action="/booking" method="POST">
+<form action="/home" method="POST">
     @csrf
-    <div class="modal fade" id="bookingcreate" tabindex="-1" role="dialog" aria-labelledby="bookingcreate"
-        aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="bookingcreate">TAMBAH PEMBOOKINGAN</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
+    <div class="modal fade" id="homebooking" tabindex="-1" role="dialog" aria-labelledby="homebooking"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg"  role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="homebooking">TAMBAH PEMBOOKINGAN</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
                     <div class="form-group mt-3">
                         <label for="tanggal_booking">Tanggal Booking</label>
                         <input type="date" name="tanggal_booking" class="form-control"
@@ -25,11 +25,9 @@
                         <select name="user_id" class="form-control select2" data-placeholder="Cari nama pelanggan">
                             <option value="">-- Pilih Pelanggan --</option>
                             @foreach ($listPengguna as $item)
-                                @if ($item->role == 'user')
-                                    <option value="{{ $item->id }}" @selected(old('user_id') == $item->id)>
-                                        {{ $item->nik }} - {{ $item->name }}
-                                    </option>
-                                @endif
+                                <option value="{{ $item->id }}" @selected(old('user_id') == $item->id)>
+                                    {{ $item->nik }} - {{ $item->nama }}
+                                </option>
                             @endforeach
                         </select>
                         <span class="text-danger">{{ $errors->first('user_id') }}</span>
@@ -41,7 +39,7 @@
                         <label for="produk_id">Produk</label>
                         <select id="produk_id" name="produk_id" class="form-control">
                             <option value="">Pilih Produk</option>
-                            @foreach ($listProduk as $produk)
+                            @foreach($listProduk as $produk)
                                 <option value="{{ $produk->id }}" data-harga="{{ $produk->harga_jual }}">
                                     {{ $produk->jenis }}
                                 </option>
@@ -52,8 +50,7 @@
 
                     <div class="form-group mt-3 mb-3">
                         <label for="jumlah_produk">Jumlah Produk</label>
-                        <input type="number" id="jumlah_produk" name="jumlah_produk" class="form-control"
-                            value="{{ old('jumlah_produk') }}">
+                        <input type="number" id="jumlah_produk" name="jumlah_produk" class="form-control" value="{{ old('jumlah_produk') }}">
                         <span class="text-danger">{{ $errors->first('jumlah_produk') }}</span>
                     </div>
 
@@ -85,12 +82,12 @@
                             jumlahInput.addEventListener('input', calculateTotal);
                         });
                     </script>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn mb-2 btn-secondary" data-dismiss="modal">Keluar</button>
-                    <button type="submit" class="btn btn-primary" id="submit">Tambah</button>
-                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn mb-2 btn-secondary" data-bs-dismiss="modal">Keluar</button>
+                <button type="submit" class="btn btn-primary" id="submit">Tambah</button>
             </div>
         </div>
     </div>
+</div>
 </form>

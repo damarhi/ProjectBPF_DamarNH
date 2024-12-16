@@ -1,6 +1,7 @@
 <form action="/transaksi" method="POST">
     @csrf
-    <div class="modal fade" id="transaksicreate" tabindex="-1" role="dialog" aria-labelledby="transaksicreate" aria-hidden="true">
+    <div class="modal fade" id="transaksicreate" tabindex="-1" role="dialog" aria-labelledby="transaksicreate"
+        aria-hidden="true">
         <div class="modal-dialog modal-lg" style=" transform: translateX(-20px);" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -12,22 +13,25 @@
                 <div class="modal-body">
                     <div class="form-group mt-3">
                         <label for="tanggal_transaksi">Tanggal Transaksi</label>
-                        <input type="date" name="tanggal_transaksi" class="form-control" value="{{ old('tanggal_transaksi') ?? date('Y-m-d') }}">
+                        <input type="date" name="tanggal_transaksi" class="form-control"
+                            value="{{ old('tanggal_transaksi') ?? date('Y-m-d') }}">
                         <span class="text-danger">{{ $errors->first('tanggal_transaksi') }}</span>
                     </div>
                     <div class="form-group mt-3">
-                        <label for="pengguna_id">Nama Pelanggan |
+                        <label for="user_id">Nama Pelanggan |
                             <a href="" data-toggle="modal" data-target=".modal-right">Pelanggan Baru</a>
                         </label>
-                        <select name="pengguna_id" class="form-control select2" data-placeholder="Cari nama pelanggan">
+                        <select name="user_id" class="form-control select2" data-placeholder="Cari nama pelanggan">
                             <option value="">-- Pilih Pelanggan --</option>
                             @foreach ($listPengguna as $item)
-                                <option value="{{ $item->id }}" @selected(old('pengguna_id') == $item->id)>
-                                    {{ $item->nik }} - {{ $item->nama }}
-                                </option>
+                                @if ($item->role == 'user')
+                                    <option value="{{ $item->id }}" @selected(old('user_id') == $item->id)>
+                                        {{ $item->nik }} - {{ $item->name }}
+                                    </option>
+                                @endif
                             @endforeach
                         </select>
-                        <span class="text-danger">{{ $errors->first('pengguna_id') }}</span>
+                        <span class="text-danger">{{ $errors->first('user_id') }}</span>
                     </div>
                     <div>
                         Setelah menambahkan pelanggan baru, tekan f5
@@ -36,7 +40,7 @@
                         <label for="produk_id">Produk</label>
                         <select id="produk_id" name="produk_id" class="form-control">
                             <option value="">Pilih Produk</option>
-                            @foreach($listProduk as $produk)
+                            @foreach ($listProduk as $produk)
                                 <option value="{{ $produk->id }}" data-harga="{{ $produk->harga_jual }}">
                                     {{ $produk->jenis }}
                                 </option>
@@ -46,7 +50,8 @@
                     </div>
                     <div class="form-group mt-3 mb-3">
                         <label for="jumlah_produk">Jumlah Produk</label>
-                        <input type="number" id="jumlah_produk" name="jumlah_produk" class="form-control" value="{{ old('jumlah_produk') }}">
+                        <input type="number" id="jumlah_produk" name="jumlah_produk" class="form-control"
+                            value="{{ old('jumlah_produk') }}">
                         <span class="text-danger">{{ $errors->first('jumlah_produk') }}</span>
                     </div>
                     <div class="form-group mt-3 mb-3">

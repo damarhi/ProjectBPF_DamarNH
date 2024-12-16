@@ -40,7 +40,7 @@
                 @foreach ($booking as $item)
                  <tr>
                      <td> {{ $loop->iteration}}</td>
-                     <td> {{ $item->pengguna->nama}}</td>
+                     <td> {{ $item->User->name}}</td>
                      <td> {{ $item->produk->jenis}}</td>
                      <td> {{ $item->jumlah_produk}}</td>
                      <td> RP. {{ number_format($item->total_harga)}}- </td>

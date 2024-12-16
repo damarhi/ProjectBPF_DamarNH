@@ -14,17 +14,17 @@
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title"> Ubah Status Pembookingan</h5>
-                                <b>{{ strtoupper($item->pengguna->nama) }}</b>
+                                <b>{{ strtoupper($item->User->name) }}</b>
                                 <table>
                                 <tr>
                                     <td>Pelanggan  </td>
                                     <td>: </td>
-                                    <td>{{ $item->pengguna->nama}}</td>
+                                    <td>{{ $item->User->name}}</td>
                                 </tr>
                                 <tr>
                                     <td>NIK  </td>
                                     <td>: </td>
-                                    <td>{{ $item->pengguna->nik}}</td>
+                                    <td>{{ $item->User->nik}}</td>
                                 </tr>
                                 <tr>
                                     <td>Jenis : </td>

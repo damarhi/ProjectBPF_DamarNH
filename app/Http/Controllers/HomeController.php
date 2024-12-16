@@ -31,7 +31,7 @@ class HomeController extends Controller
         $data = [
             'booking' => $query->paginate(10),
             'listProduk' => \App\Models\produk::all(),
-            'listPengguna' => \App\Models\pengguna::all(),
+            'listPengguna' => \App\Models\User::all(),
         ];
         return view('home', $data);
     }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\pengguna;
+use App\Models\User;
 use App\Models\produk;
 use App\Models\transaksi;
 use Illuminate\Http\Request;
@@ -17,7 +18,7 @@ class transaksiController extends Controller
         $data = [
             'transaksi' => \App\Models\transaksi::latest()->paginate(10),
             'listProduk' => \App\Models\produk::all(),
-            'listPengguna' => \App\Models\pengguna::all(),
+            'listPengguna' => \App\Models\User::all(),
         ];
 
         return view('transaksi.index', $data);
@@ -30,7 +31,7 @@ class transaksiController extends Controller
     public function create()
     {
         $listProduk['listProduk'] = produk::all();
-        $listPengguna ['listPengguna'] = pengguna::all();
+        $listPengguna ['listPengguna'] = User::all();
         return view('transaksi.create', $listProduk, $listPengguna);
     }
 
@@ -42,12 +43,12 @@ class transaksiController extends Controller
         $requestData = $request-> validate([
             'tanggal_transaksi' => 'required|date',
             'produk_id' => 'required|numeric',
-            'pengguna_id'=>'required|numeric',
+            'user_id'=>'required|numeric',
             'total_harga'=> 'required|numeric|',
             'jumlah_produk'=> 'required|numeric|',
         ]);
 
-        $produk = \App\Models\Produk::find($requestData['produk_id']);
+        $produk = \App\Models\produk::find($requestData['produk_id']);
 
         if (!$produk) {
             return redirect()->back()->withErrors(['produk_id' => 'Produk tidak ditemukan.'])->withInput();
@@ -55,7 +56,7 @@ class transaksiController extends Controller
 
         $stok_sekarang = $produk->stok_sekarang - $requestData['jumlah_produk'] ;
         $stok_terjual = $produk->stok_terjual + $requestData['jumlah_produk'];
-        
+
         $produk->stok_sekarang = $stok_sekarang;
         $produk->stok_terjual = $stok_terjual;
         $produk->save();
