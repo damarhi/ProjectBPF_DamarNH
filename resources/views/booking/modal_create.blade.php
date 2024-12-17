@@ -21,8 +21,8 @@
                     <div class="form-group mt-3">
                         <label for="user_id">Nama Pelanggan |
                             <a href="/pengguna/create" target="blank">Pelanggan Baru</a>
-                        </label>
-                        <select name="user_id" class="form-control select2" data-placeholder="Cari nama pelanggan">
+                        </label><br>
+                        <select name="user_id" class="form-control select2" data-placeholder="Cari nama pelanggan" style="width: 768px;">
                             <option value="">-- Pilih Pelanggan --</option>
                             @foreach ($listPengguna as $item)
                                 @if ($item->role == 'user')
@@ -37,9 +37,9 @@
                     <div>
                         Setelah menambahkan pelanggan baru, tekan f5
                     </div>
-                    <div class="form-group mt-3 mb-3">
-                        <label for="produk_id">Produk</label>
-                        <select id="produk_id" name="produk_id" class="form-control">
+                    <div class="form-group mt-3">
+                        <label for="produk_id">Produk</label><br>
+                        <select id="produk_id" name="produk_id" class="form-control select2" data-placeholder="Cari produk" style="width: 768px;">
                             <option value="">Pilih Produk</option>
                             @foreach ($listProduk as $produk)
                                 <option value="{{ $produk->id }}" data-harga="{{ $produk->harga_jual }}">

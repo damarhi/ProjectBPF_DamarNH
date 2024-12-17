@@ -104,6 +104,7 @@ class transaksiController extends Controller
     public function destroy($id)
     {
         $transaksi = \App\Models\transaksi::findOrFail($id);
+
         $transaksi->delete();
         // flash('Data sudah dihapus')->success();
 

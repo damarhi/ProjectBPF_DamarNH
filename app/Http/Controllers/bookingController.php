@@ -155,6 +155,10 @@ class bookingController extends Controller
     public function destroy(string $id)
     {
         $booking =booking::findOrFail($id);
+        if($booking->status=='Disetujui'){
+            session()->flash('error');
+            return back();
+        }
         $booking->delete();
         // flash('Data sudah dihapus')->success();
         return back();

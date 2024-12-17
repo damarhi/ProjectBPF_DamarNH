@@ -101,6 +101,29 @@ class penggunaController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+
+
+        $pengguna = \App\Models\User::findOrFail($id);
+        if($pengguna->transaksi->count()>=1){
+            session()->flash('error');
+            return back();
+        }
+
+        if($pengguna->booking->count()>=1){
+            session()->flash('error');
+            return back();
+        }
+
+        $pengguna->delete();
+        // flash('Data sudah dihapus')->success();
+
+        if($pengguna){
+            session()->flash('success');
+        }
+        else{
+            session()->flash('error');
+        }
+
+        return back();
     }
 }

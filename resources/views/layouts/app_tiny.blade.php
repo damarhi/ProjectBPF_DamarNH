@@ -21,6 +21,10 @@
     <!-- App CSS -->
     <link rel="stylesheet" href="/light/css/app-light.css" id="lightTheme">
     <link rel="stylesheet" href="/light/css/app-dark.css" id="darkTheme" disabled>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+
+
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
         .logo-small {
@@ -37,10 +41,13 @@
             <button type="button" class="navbar-toggler text-muted mt-2 p-0 mr-3 collapseSidebar">
                 <i class="fe fe-menu navbar-toggler-icon"></i>
             </button>
-            <form class="form-inline mr-auto searchform text-muted">
-                <input class="form-control mr-sm-2 bg-transparent border-0 pl-4 text-muted" type="search"
-                    placeholder="Type something..." aria-label="Search">
-            </form>
+            <div>
+                <form class="form-inline mr-auto searchform text-muted">
+                    <input class="form-control mr-sm-2 bg-transparent border-0 pl-4 text-muted" type="text"
+                        id="searchInput" placeholder="Type something..." aria-label="Search">
+                </form>
+
+            </div>
             <ul class="nav">
                 <li class="nav-item">
                     <a class="nav-link text-muted my-2" href="#" id="modeSwitcher" data-mode="light">
@@ -84,7 +91,7 @@
 
                 <ul class="navbar-nav flex-fill w-100 mb-2">
                     <li class="nav-item w-100">
-                        <a class="nav-link" href="widgets.html">
+                        <a class="nav-link" href="/dashboard">
                             <i class="fe fe-home fe-16"></i>
                             <span class="ml-3 item-text">Dashboard</span>
                         </a>
@@ -153,8 +160,7 @@
                             <span class="ml-3 item-text">Laporan</span>
                         </a>
                         <ul class="collapse list-unstyled pl-4 w-100" id="contact">
-                            <a class="nav-link pl-3" href="/laporan/create"><span
-                                    class="ml-1">Penjualan</span></a>
+                            <a class="nav-link pl-3" href="/laporan/create"><span class="ml-1">Penjualan</span></a>
                         </ul>
                     </li>
 
@@ -170,6 +176,10 @@
         </main> <!-- main -->
     </div> <!-- .wrapper -->
     <script src="/light/js/jquery.min.js"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
     <script src="/light/s/popper.min.js"></script>
     <script src="/light/js/moment.min.js"></script>
     <script src="/light/js/bootstrap.min.js"></script>
@@ -257,8 +267,18 @@
             })
         })
     </script>
-
-
+    <script>
+        // In your Javascript (external .js resource or <script> tag)
+        $(document).ready(function() {
+            $('.select2').select2({
+                placeholder:function(){
+                    $(this).data('placeholder');
+                },
+                allowClear: true,
+                width:'resolve',
+            });
+        });
+    </script>
 </body>
 
 </html>

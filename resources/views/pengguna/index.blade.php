@@ -27,7 +27,7 @@
                      <td> {{ $item->nik}}</td>
                      <td> {{ $item->created_at }}</td>
                      <td class="text-left">
-                        <a href="#penggunaedit{{ $item->id }}" class="btn btn-warning btn-sm ml-2" data-toggle="modal" data-bs-toggle="modal">Edit</a>
+                        <a href="#penggunaedit{{ $item->id }}" class="btn btn-info btn-sm" data-toggle="modal" data-bs-toggle="modal">Edit</a>
                         <form action="/pengguna/{{ $item->id }}" method="POST" class="d-inline">
                             @csrf
                             @method('delete')
@@ -48,4 +48,6 @@
     </div>
     @include('pengguna.modal_create')
     @include('pengguna.modal_edit')
+
+
 @endsection

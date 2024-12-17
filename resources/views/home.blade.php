@@ -88,13 +88,13 @@
                                         <td>{{ $item->tanggal_booking }}</td>
                                         <td>{{ $item->status }}</td>
                                         <td class="text-center">
-                                            <a href="#bookingshow{{ $item->id }}" class="btn btn-info btn-sm"
+                                            <a href="#detailbooking{{ $item->id }}" class="btn btn-info btn-sm"
                                                 data-toggle="modal" data-bs-toggle="modal">Detail</a>
-                                            <form action="/booking/{{ $item->id }}" method="POST" class="d-inline">
-                                                @csrf
-                                                @method('delete')
-                                                <button class="btn btn-danger btn-sm ml-2" id="delete">Hapus</button>
-                                            </form>
+                                                <form action="{{ url('/home/' . $item->id) }}" method="POST" class="d-inline">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button class="btn btn-danger btn-sm ml-2" id="delete">Hapus</button>
+                                                </form>
                                         </td>
                                     </tr>
                                 @endif
@@ -135,7 +135,7 @@
                                 <h4><sup>stok : {{ $item->stok_sekarang }}</span></h4>
 
                                 <div class="file-action">
-                                    <a href="#homebooking" class="btn btn-info btn-sm"
+                                    <a href="#homebooking{{ $item->id }}" class="btn btn-info btn-sm"
                                         data-toggle="modal" data-bs-toggle="modal">Booking</a>
                                 </div>
                             </div>
@@ -215,4 +215,5 @@
 
     <!-- Preloader -->
     @include('homeBooking')
+    @include('detailBooking')
 @endsection

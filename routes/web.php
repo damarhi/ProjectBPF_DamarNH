@@ -27,9 +27,12 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
 });
 
 Route::middleware(['auth', 'user-access:user'])->group(function () {
-
     Route::get('/home', [HomeController::class, 'index'])->name('home');
+    Route::post('/home', [HomeController::class, 'store'])->name('home.store');
+    Route::delete('/home/{id}', [HomeController::class, 'destroy'])->name('home.destroy');
+    
 });
+
 
 // Route::middleware([Authenticate::class])->group(function(){
 //    Route::resource('transaksi',transaksiController::class);

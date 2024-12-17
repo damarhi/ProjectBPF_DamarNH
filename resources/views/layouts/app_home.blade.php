@@ -124,6 +124,60 @@
     <!-- Main JS File -->
     <script src="/BizLand/assets/js/main.js"></script>
 
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    @if (session('success'))
+        <script>
+            Swal.fire({
+                icon: "success",
+                title: "Your work has been saved",
+                showConfirmButton: true,
+                timer: 5000
+            });
+        </script>
+    @endif
+
+    @if (session('error'))
+        <script>
+            Swal.fire({
+                icon: "error",
+                title: "Your work has not been saved",
+                showConfirmButton: true,
+                timer: 5000
+            });
+        </script>
+    @endif
+
+    <script type="text/javascript">
+        $(function() {
+            $(document).on('click', '#delete', function(e) {
+
+                let form = $(this).closest("form");
+
+                e.preventDefault();
+                var link = $(this).attr('href');
+                // import swal from 'sweetalert';
+                Swal.fire({
+                    title: "Are you sure?",
+                    text: "You won't be able to revert this!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Yes, delete it!"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                       
+                        form.submit();
+                    }
+                });
+            })
+        })
+    </script>
+
+
+
+
 
 </body>
 
