@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use App\Models\booking;
+use App\Models\transaksi;
 class HomeController extends Controller
 {
     /**
@@ -62,10 +63,10 @@ class HomeController extends Controller
         $booking->save();
 
         if($booking){
-            session()->flash('success');
+            session()->flash('success', 'Berhasil Melakukan Booking');
         }
         else{
-            session()->flash('error');
+            session()->flash('error', 'Terjadi Kesalahan, Gagal Melakukan Booking');
         }
 
         return back();
@@ -97,6 +98,22 @@ class HomeController extends Controller
     {
 
         $data['booking'] = \App\Models\booking::latest()->get();
+        $data['produk'] = \App\Models\produk::latest()->get();
+        $data['transaksi'] = \App\Models\transaksi::latest()->get();
         return view('dashboard',$data);
+    }
+
+    public function filter(Request $request){
+       $start_date=$request->start_date;
+       $end_date=$request->end_date;
+
+       $data['transaksi'] = transaksi::whereDate('created_at', '>=',$start_date)
+                                ->whereDate('created_at', '<=',$end_date)
+                                ->get();
+
+        $data['booking'] = \App\Models\booking::latest()->get();
+        $data['produk'] = \App\Models\produk::latest()->get();
+        return view('dashboard',$data);
+
     }
 }

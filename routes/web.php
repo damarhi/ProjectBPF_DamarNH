@@ -18,6 +18,7 @@ Auth::routes();
 Route::middleware(['auth', 'user-access:admin'])->group(function () {
 
     Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
+    Route::get('/filter', [HomeController::class, 'filter'])->name('filter');
 
     Route::resource('pengguna', penggunaController::class);
     Route::resource('transaksi', transaksiController::class);
@@ -30,7 +31,7 @@ Route::middleware(['auth', 'user-access:user'])->group(function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
     Route::post('/home', [HomeController::class, 'store'])->name('home.store');
     Route::delete('/home/{id}', [HomeController::class, 'destroy'])->name('home.destroy');
-    
+
 });
 
 

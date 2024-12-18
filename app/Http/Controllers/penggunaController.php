@@ -105,12 +105,12 @@ class penggunaController extends Controller
 
         $pengguna = \App\Models\User::findOrFail($id);
         if($pengguna->transaksi->count()>=1){
-            session()->flash('error');
+            session()->flash('error','Gagal Menghapus Karena Pengguna Sudah Melakukan Transaksi');
             return back();
         }
 
         if($pengguna->booking->count()>=1){
-            session()->flash('error');
+            session()->flash('error', 'Gagal Menghapus Karena Pengguna Sudah Melakukan Booking');
             return back();
         }
 
@@ -118,10 +118,7 @@ class penggunaController extends Controller
         // flash('Data sudah dihapus')->success();
 
         if($pengguna){
-            session()->flash('success');
-        }
-        else{
-            session()->flash('error');
+            session()->flash('success','Berhasil Menghapus');
         }
 
         return back();

@@ -188,6 +188,28 @@
     <script src='/light/js/jquery.stickOnScroll.js'></script>
     <script src="/light/js/tinycolor-min.js"></script>
     <script src="/light/js/config.js"></script>
+    <script src="/light/js/topojson.min.js"></script>
+    <script src="/light/js/datamaps.all.min.js"></script>
+    <script src="/light/js/datamaps-zoomto.js"></script>
+    <script src="/light/js/datamaps.custom.js"></script>
+    <script src="/light/js/Chart.min.js"></script>
+    <script>
+      /* defind global options */
+      Chart.defaults.global.defaultFontFamily = base.defaultFontFamily;
+      Chart.defaults.global.defaultFontColor = colors.mutedColor;
+    </script>
+    <script src="/light/js/gauge.min.js"></script>
+    <script src="/light/js/jquery.sparkline.min.js"></script>
+    <script src="/light/js/apexcharts.min.js"></script>
+    <script src="/light/js/apexcharts.custom.js"></script>
+    <script src='/light/js/jquery.mask.min.js'></script>
+    <script src='/light/js/select2.min.js'></script>
+    <script src='/light/js/jquery.steps.min.js'></script>
+    <script src='/light/js/jquery.validate.min.js'></script>
+    <script src='/light/js/jquery.timepicker.js'></script>
+    <script src='/light/js/dropzone.min.js'></script>
+    <script src='/light/js/uppy.min.js'></script>
+    <script src='/light/js/quill.min.js'></script>
     <script src="/light/js/apps.js"></script>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-56159088-1"></script>
@@ -215,24 +237,33 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     @if (session('success'))
-        <script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
             Swal.fire({
-                icon: "success",
-                title: "Your work has been saved",
-                showConfirmButton: true,
-                timer: 5000
+                position: 'center',
+                icon: 'success',
+                title: '{{ session('success') }}',
+                showConfirmButton: false,
+                timer: 2000,
+                backdrop: false,
             });
-        </script>
+        });
+    </script>
+
     @endif
 
     @if (session('error'))
         <script>
+            document.addEventListener('DOMContentLoaded', function () {
             Swal.fire({
-                icon: "error",
-                title: "Your work has not been saved",
-                showConfirmButton: true,
-                timer: 5000
+                position: 'center',
+                icon: 'error',
+                title: '{{ session('error') }}',
+                showConfirmButton: false,
+                timer: 2000,
+                backdrop: false,
             });
+        });
         </script>
     @endif
 
@@ -256,11 +287,7 @@
                     confirmButtonText: "Yes, delete it!"
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        Swal.fire({
-                            title: "Deleted!",
-                            text: "Your file has been deleted.",
-                            icon: "success"
-                        });
+
                         form.submit();
                     }
                 });

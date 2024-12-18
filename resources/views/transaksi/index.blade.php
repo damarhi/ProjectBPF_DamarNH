@@ -9,6 +9,7 @@
                 <div class="col-md-6">
                     <a href="#" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#transaksicreate">Tambah Transaksi</a>
                 </div>
+                
             </div>
             <thead>
                 <tr>

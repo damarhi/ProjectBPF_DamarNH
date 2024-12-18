@@ -66,10 +66,10 @@ class transaksiController extends Controller
         $transaksi->save();
 
         if($transaksi){
-            session()->flash('success');
+            session()->flash('success','Transaksi Berhasil');
         }
         else{
-            session()->flash('error');
+            session()->flash('error', 'Terjadi Kesalahan, Gagal Melakukan Transaksi');
         }
         return redirect()->route('transaksi.index');
     }
@@ -109,10 +109,10 @@ class transaksiController extends Controller
         // flash('Data sudah dihapus')->success();
 
         if($transaksi){
-            session()->flash('success');
+            session()->flash('success','Data Berhasil Dihapus');
         }
         else{
-            session()->flash('error');
+            session()->flash('error','Data Gagal Dihapus');
         }
 
         return back();

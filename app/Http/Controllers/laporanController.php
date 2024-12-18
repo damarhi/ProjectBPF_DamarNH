@@ -33,7 +33,7 @@ class laporanController extends Controller
      */
     public function create()
     {
-        $data['listPengguna']=\App\Models\User::orderBy('nama','asc')->get();
+        $data['listPengguna']=\App\Models\User::orderBy('name','asc')->get();
         $data['listProduk']=\App\Models\produk::orderBy('jenis','asc')->pluck('jenis','id');
         $data['listTransaksi']=\App\Models\transaksi::orderBY('id','asc')->get();
         return view('laporan.create', $data);

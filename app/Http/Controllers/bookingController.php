@@ -140,10 +140,10 @@ class bookingController extends Controller
         $booking->save();
 
         if($booking){
-            session()->flash('success');
+            session()->flash('success','Berhasil Mengubah Data');
         }
         else{
-            session()->flash('error');
+            session()->flash('error','Terjadi Kesalahan, Gagal Mengubah Data');
         }
 
         return redirect('/booking');
@@ -156,10 +156,14 @@ class bookingController extends Controller
     {
         $booking =booking::findOrFail($id);
         if($booking->status=='Disetujui'){
-            session()->flash('error');
+            session()->flash('error','Gagal Menghapus Karena Bookingan Disetujui');
             return back();
         }
         $booking->delete();
+
+        if($booking){
+            session()->flash('success','Berhasil Menghapus Bookingan');
+        }
         // flash('Data sudah dihapus')->success();
         return back();
     }

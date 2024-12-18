@@ -48,6 +48,12 @@ class produkController extends Controller
         $produk->stok_terjual = $requestData['stok_terjual'] ?? 0;
 
         $produk->save();
+        if($produk){
+            session()->flash('success','Data Berhasil Ditambahkan');
+        }
+        else{
+            session()->flash('error','Data Gagal Ditambahkan');
+        }
 
         return back();
     }
@@ -83,10 +89,10 @@ class produkController extends Controller
         $produk->fill($requestData);
         $produk->save();
         if($produk){
-            session()->flash('success');
+            session()->flash('success','Data Berhasil Diubah');
         }
         else{
-            session()->flash('error');
+            session()->flash('error','Data Gagal Diubah');
         }
 
         // flash('Data berhasil di simpan')->success();

@@ -128,23 +128,31 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     @if (session('success'))
         <script>
+           document.addEventListener('DOMContentLoaded', function () {
             Swal.fire({
-                icon: "success",
-                title: "Your work has been saved",
-                showConfirmButton: true,
-                timer: 5000
+                position: 'center',
+                icon: 'success',
+                title: '{{ session('success') }}',
+                showConfirmButton: false,
+                timer: 2000,
+                backdrop: false,
             });
+        });
         </script>
     @endif
 
     @if (session('error'))
         <script>
+            document.addEventListener('DOMContentLoaded', function () {
             Swal.fire({
-                icon: "error",
-                title: "Your work has not been saved",
-                showConfirmButton: true,
-                timer: 5000
+                position: 'center',
+                icon: 'error',
+                title: '{{ session('error') }}',
+                showConfirmButton: false,
+                timer: 2000,
+                backdrop: false,
             });
+        });
         </script>
     @endif
 
@@ -167,7 +175,7 @@
                     confirmButtonText: "Yes, delete it!"
                 }).then((result) => {
                     if (result.isConfirmed) {
-                       
+
                         form.submit();
                     }
                 });
