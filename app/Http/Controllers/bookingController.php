@@ -75,10 +75,10 @@ class bookingController extends Controller
         $booking->save();
 
         if($booking){
-            session()->flash('success');
+            session()->flash('success','Data Berhasil Ditambahkan');
         }
         else{
-            session()->flash('error');
+            session()->flash('error','Terjadi Kesalahan, Gagal Menambah data');
         }
 
         return redirect()->route('booking.index');

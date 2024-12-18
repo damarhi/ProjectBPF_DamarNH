@@ -82,8 +82,10 @@ class produkController extends Controller
     public function update(Request $request, string $id)
     {
         $requestData = $request->validate([
-            'stok_sekarang' => 'required|numeric',
-            'stok_terjual' => 'required|numeric',
+            'stok_sekarang' => 'nullable|numeric',
+            'stok_terjual' => 'nullable|numeric',
+            'harga_asli' => 'nullable|numeric',
+            'harga_jual' => 'nullable|numeric',
         ]);
         $produk = \App\Models\produk::findOrFail($id);
         $produk->fill($requestData);
@@ -104,6 +106,18 @@ class produkController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $produk = \App\Models\produk::findOrFail($id);
+
+        $produk->delete();
+        // flash('Data sudah dihapus')->success();
+
+        if($produk){
+            session()->flash('success','Data Berhasil Dihapus');
+        }
+        else{
+            session()->flash('error','Data Gagal Dihapus');
+        }
+
+        return back();
     }
 }

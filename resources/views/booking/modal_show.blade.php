@@ -15,7 +15,7 @@
                             <div class="card-body">
                                 <h5 class="card-title"> Ubah Status Pembookingan</h5>
                                 <b>{{ strtoupper($item->User->name) }}</b>
-                                <table>
+                                <table style="width: 100%">
                                 <tr>
                                     <td>Pelanggan  </td>
                                     <td>: </td>
@@ -27,17 +27,17 @@
                                     <td>{{ $item->User->nik}}</td>
                                 </tr>
                                 <tr>
-                                    <td>Jenis : </td>
+                                    <td>Jenis  </td>
                                     <td>: </td>
                                     <td>{{ $item->produk->jenis}}</td>
                                 </tr>
                                 <tr>
-                                    <td>Jumlah Produk : </td>
+                                    <td>Jumlah Produk  </td>
                                     <td>: </td>
                                     <td>{{ $item->jumlah_produk}}</td>
                                 </tr>
                                 <tr>
-                                    <td>Total Harga : </td>
+                                    <td>Total Harga  </td>
                                     <td>: </td>
                                     <td> RP. {{ number_format($item->total_harga)}}- </td>
                                 </tr>

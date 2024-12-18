@@ -29,7 +29,6 @@
                     <th>Jenis Produk</th>
                     <th>Jumlah Produk</th>
                     <th>Total Harga</th>
-                    <th>Tanggal Transaksi</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -42,9 +41,8 @@
                      <td> {{ $item->produk->jenis}}</td>
                      <td> {{ $item->jumlah_produk}}</td>
                      <td> RP. {{ number_format($item->total_harga)}}- </td>
-                     <td> {{ $item->tanggal_transaksi}}</td>
                      <td class="text-center">
-                        <a href="/transaksi/{{$item->id}}" class="btn btn-info btn-sm">Detail</a>
+                        <a href="#transaksishow{{$item->id}}" class="btn btn-info btn-sm" data-toggle="modal" data-bs-toggle="modal">Detail</a>
                         <form action="/transaksi/{{$item->id}}" method="POST" class="d-inline">
                             @csrf
                             @method('delete')
@@ -61,5 +59,6 @@
         </div>
     </div>
     @include('transaksi.modal_create')
+    @include('transaksi.modal_show')
 
 @endsection

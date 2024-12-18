@@ -41,8 +41,7 @@
                         <form action="/pengguna/{{ $item->id }}" method="POST" class="d-inline">
                             @csrf
                             @method('delete')
-                            <button class="btn btn-danger btn-sm ml-2"
-                                onclick="return confirm('yakin ingin menghapus data?')">Hapus</button>
+                            <button class="btn btn-danger btn-sm ml-2" id="delete">Hapus</button>
                         </form>
 
                     </td>
