@@ -6,7 +6,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="favicon.ico">
-    <title>Tiny Dashboard - A Bootstrap Dashboard Template</title>
+    <title>{{ config('app.name', 'Laravel') }}</title>
     <!-- Simple bar CSS -->
     <link rel="/light/stylesheet" href="css/simplebar.css">
     <!-- Fonts CSS -->

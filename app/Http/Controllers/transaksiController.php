@@ -15,11 +15,20 @@ class transaksiController extends Controller
      */
     public function index()
     {
-        $data = [
-            'transaksi' => \App\Models\transaksi::latest()->paginate(10),
-            'listProduk' => \App\Models\produk::all(),
-            'listPengguna' => \App\Models\User::all(),
-        ];
+        if (request()->filled( 'q')) {
+            $data = [
+                'transaksi' => transaksi::search(request('q'))->paginate(10),
+                'listProduk' => \App\Models\produk::all(),
+                'listPengguna' => \App\Models\User::all(),
+            ];
+        }else{
+            $data = [
+                'transaksi' => \App\Models\transaksi::latest()->paginate(10),
+                'listProduk' => \App\Models\produk::all(),
+                'listPengguna' => \App\Models\User::all(),
+            ];
+        }
+
 
         return view('transaksi.index', $data);
     }

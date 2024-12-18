@@ -20,11 +20,21 @@ class bookingController extends Controller
             $query->where('status', $request->status);
         }
 
-        $data = [
-            'booking' => $query->paginate(10),
-            'listProduk' => \App\Models\produk::all(),
-            'listPengguna' => \App\Models\User::all(),
-        ];
+        if (request()->filled( 'q')) {
+            $data = [
+                'booking' => booking::search(request('q'))->paginate(10),
+                'listProduk' => \App\Models\produk::all(),
+                'listPengguna' => \App\Models\User::all(),
+            ];
+        }else{
+            $data = [
+                'booking' => $query->paginate(10),
+                'listProduk' => \App\Models\produk::all(),
+                'listPengguna' => \App\Models\User::all(),
+            ];
+        }
+
+
         return view('booking.index', $data);
     }
 

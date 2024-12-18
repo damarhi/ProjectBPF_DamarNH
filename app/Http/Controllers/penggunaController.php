@@ -14,6 +14,14 @@ class penggunaController extends Controller
     public function index()
     {
         $data['listPengguna']= User::latest()->paginate(10);
+        if (request()->filled( 'q')) {
+            $data = [
+                'listPengguna' => User::search(request('q'))->paginate(10),
+            ];
+        }else{
+            $data['listPengguna']= User::latest()->paginate(10);
+        }
+
         return view('pengguna.index',$data);
     }
 

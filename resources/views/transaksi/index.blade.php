@@ -2,14 +2,24 @@
 @section('content')
     <div class="card">
         <div class="card-body">
-           <h3>Data Transaksi Pelanggan</h3>
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h3>Data Transaksi Pelanggan</h3>
+                    <form class="d-flex" action="">
+                        <div class="input-group" style="width: 400px;">
+                            <input type="text" name="q" class="form-control" placeholder="Cari Nama atau NIK Pelanggan"
+                                value="{{ request('q') }}">
+                            <button type="submit" class="btn btn-primary btn-sm">CARI</button>
+                        </div>
+                    </form>
+                </div>
            <table class="table table-striped">
 
             <div class="row mb-3 mt-3">
                 <div class="col-md-6">
                     <a href="#" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#transaksicreate">Tambah Transaksi</a>
                 </div>
-                
+
             </div>
             <thead>
                 <tr>

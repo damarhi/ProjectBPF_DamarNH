@@ -1,8 +1,18 @@
-@extends('layouts.app_tiny',['title'=> 'Data Pengguna'])
+@extends('layouts.app_tiny',['title'=> 'Data Pelanggan'])
 @section('content')
     <div class="card">
         <div class="card-body">
-           <h3>Data Pengguna</h3>
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h3>Data Pelanggan</h3>
+                    <form class="d-flex" action="">
+                        <div class="input-group" style="width: 400px;">
+                            <input type="text" name="q" class="form-control" placeholder="Cari Nama atau NIK Pelanggan"
+                                value="{{ request('q') }}">
+                            <button type="submit" class="btn btn-primary btn-sm">CARI</button>
+                        </div>
+                    </form>
+                </div>
            <table class="table table-striped">
             <div class="row mb-4 mt-4">
                 <div class="col-md-6">

@@ -1,4 +1,4 @@
-@extends('layouts.app_tiny_laporan')
+@extends('layouts.app_tiny_laporan',['title' => 'Laporan Penjualan'])
 @section('content')
 <h3>LAPORAN DATA PENJUALAN GAS</h3>
 <table class="table table-bordered">

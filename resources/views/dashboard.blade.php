@@ -1,4 +1,4 @@
-@extends('layouts.app_tiny')
+@extends('layouts.app_tiny',['title' => 'Dashboard Admin'])
 @section('content')
 <form method="GET" action="/filter">
     <div class="row">

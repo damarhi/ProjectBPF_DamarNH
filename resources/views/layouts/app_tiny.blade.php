@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="favicon.ico">
+    <link rel="icon" href="/light/assets/images/weblogo.png">
     <title>{{ config('app.name', 'Laravel') }}</title>
     <!-- Simple bar CSS -->
     <link rel="stylesheet" href="/light/css/simplebar.css">
@@ -26,6 +26,8 @@
 
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
     <style>
         .logo-small {
             max-height: 170px;
@@ -41,13 +43,6 @@
             <button type="button" class="navbar-toggler text-muted mt-2 p-0 mr-3 collapseSidebar">
                 <i class="fe fe-menu navbar-toggler-icon"></i>
             </button>
-            <div>
-                <form class="form-inline mr-auto searchform text-muted">
-                    <input class="form-control mr-sm-2 bg-transparent border-0 pl-4 text-muted" type="text"
-                        id="searchInput" placeholder="Type something..." aria-label="Search">
-                </form>
-
-            </div>
             <ul class="nav">
                 <li class="nav-item">
                     <a class="nav-link text-muted my-2" href="#" id="modeSwitcher" data-mode="light">
@@ -58,8 +53,7 @@
                     <a class="nav-link dropdown-toggle text-muted pr-0" href="#" id="navbarDropdownMenuLink"
                         role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <span class="avatar avatar-sm mt-2">
-                            <img src="/light/./assets/avatars/face-1.jpg" alt="..."
-                                class="avatar-img rounded-circle">
+                            <i class="bi bi-person-circle" style="font-size: 1.5rem;"></i>
                         </span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
@@ -278,13 +272,13 @@
                 var link = $(this).attr('href');
                 // import swal from 'sweetalert';
                 Swal.fire({
-                    title: "Are you sure?",
-                    text: "You won't be able to revert this!",
+                    title: "Apakah Yakin?",
+                    text: "Data Akan Di Hapus Selamanya",
                     icon: "warning",
                     showCancelButton: true,
                     confirmButtonColor: "#3085d6",
                     cancelButtonColor: "#d33",
-                    confirmButtonText: "Yes, delete it!"
+                    confirmButtonText: "Ya, Hapus"
                 }).then((result) => {
                     if (result.isConfirmed) {
 

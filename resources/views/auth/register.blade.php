@@ -1,4 +1,4 @@
-@extends('layouts.app_auth')
+@extends('layouts.app_auth',['title' => 'Register'])
 
 @section('content')
     <div class="wrapper vh-100">
@@ -74,7 +74,7 @@
                                 {{ __('Register') }}
                             </button>
                         </form>
-                        <p class="mt-4 mb-0 text-muted">Sudah memiliki akun? <a href="{{ route('login') }}">Sign In</a></p>
+                        <p class="mt-4 mb-0 text-muted">Sudah memiliki akun? <a href="{{ route('login') }}">Login</a></p>
                     </div>
                 </div>
             </div>

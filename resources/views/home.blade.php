@@ -1,9 +1,9 @@
-@extends('layouts.app_home')
+@extends('layouts.app_home',['title' => 'Home'])
 @section('content')
     <main class="main">
 
         <!-- Hero Section -->
-        <section id="hero" class="hero section light-background">
+        <section style="background-image: url(/light/assets/images/bg.png); background-size: 60%; " class="hero section light-background">
 
             <div class="container">
                 <div class="row gy-4">
@@ -77,10 +77,16 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @php
+                                $counter = 0; // Variabel penghitung
+                            @endphp
                             @foreach ($booking as $item)
                                 @if ($item->user_id == auth()->user()->id)
+                                    @php
+                                        $counter++; // Increment counter untuk data yang ditampilkan
+                                    @endphp
                                     <tr>
-                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $counter }}</td>
                                         <td>{{ $item->User->name }}</td>
                                         <td>{{ $item->produk->jenis }}</td>
                                         <td>{{ $item->jumlah_produk }}</td>
@@ -90,16 +96,17 @@
                                         <td class="text-center">
                                             <a href="#detailbooking{{ $item->id }}" class="btn btn-info btn-sm"
                                                 data-toggle="modal" data-bs-toggle="modal">Detail</a>
-                                                <form action="{{ url('/home/' . $item->id) }}" method="POST" class="d-inline">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button class="btn btn-danger btn-sm ml-2" id="delete">Hapus</button>
-                                                </form>
+                                            <form action="{{ url('/home/' . $item->id) }}" method="POST" class="d-inline">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button class="btn btn-danger btn-sm ml-2" id="delete">Hapus</button>
+                                            </form>
                                         </td>
                                     </tr>
                                 @endif
                             @endforeach
                         </tbody>
+
                     </table>
                     {!! $booking->links() !!}
 

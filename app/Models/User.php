@@ -7,10 +7,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Nicolaslopezj\Searchable\SearchableTrait;
 
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
+    use SearchableTrait;
     use HasFactory, Notifiable;
 
     /**
@@ -55,4 +57,13 @@ class User extends Authenticatable
     public function booking() : hasMany {
         return $this ->hasMany(booking::class);
     }
+
+    protected $searchable = [
+        'columns' => [
+            'name' => 10,
+            'nik' => 10,
+
+        ],
+        
+    ];
 }

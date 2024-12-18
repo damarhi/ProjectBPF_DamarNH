@@ -4,13 +4,10 @@
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>Index - BizLand Bootstrap Template</title>
+    <link rel="icon" href="/light/assets/images/weblogo.png">
+    <title>{{ config('app.name', 'Laravel') }}</title>
     <meta name="description" content="">
     <meta name="keywords" content="">
-
-    <!-- Favicons -->
-    <link href="/BizLand/assets/img/favicon.png" rel="icon">
-    <link href="/BizLand/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com" rel="preconnect">
@@ -166,8 +163,8 @@
                 var link = $(this).attr('href');
                 // import swal from 'sweetalert';
                 Swal.fire({
-                    title: "Are you sure?",
-                    text: "You won't be able to revert this!",
+                    title: "Apakah Yakin Ingin Menghapus Data?",
+                    text: "Data Akan Di Hapus Selamanya",
                     icon: "warning",
                     showCancelButton: true,
                     confirmButtonColor: "#3085d6",
