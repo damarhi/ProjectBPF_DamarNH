@@ -3,7 +3,7 @@
     <main class="main">
 
         <!-- Hero Section -->
-        <section style="background-image: url(/light/assets/images/bg.png); background-size: 60%; " class="hero section light-background">
+        <section style="background-image: url(/light/assets/images/bg.png); background-size: 60%; " id="hero" class="hero section light-background">
 
             <div class="container">
                 <div class="row gy-4">

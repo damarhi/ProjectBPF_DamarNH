@@ -8,7 +8,7 @@
                 <div class="card shadow-lg rounded-4" style="min-height: 400px; max-width: 700px; margin: auto;">
                     <div class="card-body d-flex flex-column justify-content-center align-items-center p-5">
                         <!-- Centered SVG Logo -->
-                        <a class="navbar-brand mx-auto flex-fill text-center mb-3" href="./index.html">
+                        <a class="navbar-brand mx-auto flex-fill text-center mb-3" href="">
                             <img src="/light/assets/images/weblogo.png" alt=""
                         style="max-height: 180px; max-width: 100%;  object-fit: contain;">
                         </a>
