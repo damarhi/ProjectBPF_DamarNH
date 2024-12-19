@@ -51,10 +51,10 @@ class penggunaController extends Controller
         $pengguna->fill($requestData);
         $pengguna->save();
         if($pengguna){
-            session()->flash('success');
+            session()->flash('success','Berhasil Menambah Data Pelanggan');
         }
         else{
-            session()->flash('error');
+            session()->flash('error','Gagal Menambah Data Pelanggan');
         }
         return back();
     }
@@ -96,10 +96,10 @@ class penggunaController extends Controller
         $pengguna->fill($requestData);
         $pengguna->update();
         if($pengguna){
-            session()->flash('success');
+            session()->flash('success','Berhasil Menambah Data Pelanggan');
         }
         else{
-            session()->flash('error');
+            session()->flash('error','Gagal Menambah Data Pelanggan');
         }
         return back();
     }

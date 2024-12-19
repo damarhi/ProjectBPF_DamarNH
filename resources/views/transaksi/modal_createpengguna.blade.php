@@ -14,9 +14,9 @@
                     @csrf
                     <div class="form-group mt-1 mb-3">
                         <label for="nama">Nama Pelanggan</label>
-                        <input type="text" class="form-control @error('nama')is-invalid @enderror" id="nama"
-                            name="nama" value="{{ old('nama') }}" placeholder="Masukkan Nama">
-                        <span class="text-danger">{{ $errors->first('nama') }}</span>
+                        <input type="text" class="form-control @error('name')is-invalid @enderror" id="name"
+                            name="name" value="{{ old('name') }}" placeholder="Masukkan Nama">
+                        <span class="text-danger">{{ $errors->first('name') }}</span>
                     </div>
                     <div class="form-group mt-1 mb-3">
                         <label for="nik">NIK</label>

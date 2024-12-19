@@ -20,7 +20,7 @@
                     </div>
                     <div class="form-group mt-3">
                         <label for="user_id">Nama Pelanggan |
-                            <a href="/pengguna/create" target="blank">Pelanggan Baru</a>
+                            <a href="" data-toggle="modal" data-target=".modal-right">Pelanggan Baru</a>
                         </label><br>
                         <select name="user_id" class="form-control select2" data-placeholder="Cari nama pelanggan" style="width: 768px;">
                             <option value="">-- Pilih Pelanggan --</option>
@@ -94,3 +94,4 @@
         </div>
     </div>
 </form>
+@include('transaksi.modal_createpengguna')
