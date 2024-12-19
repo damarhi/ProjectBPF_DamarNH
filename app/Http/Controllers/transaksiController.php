@@ -118,10 +118,10 @@ class transaksiController extends Controller
         // flash('Data sudah dihapus')->success();
 
         if($transaksi){
-            session()->flash('success','Data Berhasil Dihapus');
+            session()->flash('success','Data Berhasil Transaksi Dihapus');
         }
         else{
-            session()->flash('error','Data Gagal Dihapus');
+            session()->flash('error','Data Gagal Transaksi Dihapus');
         }
 
         return back();
