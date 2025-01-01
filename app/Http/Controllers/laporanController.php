@@ -19,8 +19,8 @@ class laporanController extends Controller
         if ($request->filled('tanggal_akhir')) {
             $models->whereDate('created_at', '<=', $request->tanggal_transaksi);
         }
-        if ($request->filled('transaksi_id')) {
-            $models->where('transaksi_id', $request->transaksi_id);
+        if ($request->filled('produk_id')) {
+            $models->where('produk_id', $request->produk_id);
         }
 
 

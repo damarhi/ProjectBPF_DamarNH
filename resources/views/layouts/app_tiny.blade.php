@@ -78,7 +78,7 @@
             <nav class="vertnav navbar navbar-light">
                 <!-- nav bar -->
                 <div class="w-100 mb-4 d-flex">
-                    <a class="navbar-brand mx-auto mt-2 flex-fill text-center" href="./index.html">
+                    <a class="navbar-brand mx-auto mt-2 flex-fill text-center" href="/dashboard">
                         <img src="/light/assets/images/weblogo.png" alt="" class="logo-small">
                     </a>
                 </div>
